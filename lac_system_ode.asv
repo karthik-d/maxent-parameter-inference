@@ -1,0 +1,41 @@
+function funcs = lac_system_ode
+    funcs.dydt = @lac_system_dydt;
+end
+
+
+function dydt = lac_system_dydt(t, y, consts, params)
+       
+    syms tmg_i lac_y alpha beta_t beta_g r r0 rT n;
+    rate_eqns = lac_system_exprs;
+
+    % compute dependent params.
+    params.rT = params.r0*(params.rho - 1);
+    params.alpha = 84.4/(1 + (consts.glu/8.1)^1.2) + 16.1;
+    param
+
+    % active LacI (i.e., r).
+    lac_i = double(subs(exprs.lac_i, ...
+        {tmg_i rT n}, {y(1) consts.rT params.n} ...
+    ));
+    
+    % dydt is a vector of rate eqns: [tmg_i; lac_y].
+
+    dydt(1) = double(subs(rate_eqns.tmg_i, ...
+        {lac_y tmg_i alpha beta_t beta_g r r0 rT params.n}, ...
+        {y(2) y(1) params.alpha params.beta_t params.beta_g lac_i consts.r0 consts.rT params.n} ...
+    ));
+    dydt(2) = double(subs(rate_eqns.lac_y, ...
+        {lac_y tmg_i alpha beta_t beta_g r r0 rT params.n}, ...
+        {y(2) y(1) params.alpha params.beta_t params.beta_g lac_i consts.r0 consts.rT params.n} ...
+    ));
+end
+
+
+function exprs = lac_system_exprs
+
+    syms tmg_i lac_y alpha beta_t beta_g r r0 n;
+
+    exprs.tmg_i = beta_t*beta_g*lac_y - tmg_i
+    exprs.lac_y = alpha*(r0/(r + r0)) - lac_y
+    exprs.lac_i = rT*(1/(1 + tmg_i^n))
+end
