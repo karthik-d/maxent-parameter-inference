@@ -1,3 +1,7 @@
+"""
+Python interface to run ODE simulations through Matlab and fetch species trajectories.
+"""
+
 import matlab.engine
 import numpy as np
 
