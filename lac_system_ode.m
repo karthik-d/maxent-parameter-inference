@@ -1,6 +1,7 @@
 function funcs = lac_system_ode
     funcs.dydt = @lac_system_dydt;
     funcs.nullclines = @lac_system_nullclines;
+    funcs.nulleqns = @lac_system_nulleqns;
 end
 
 
@@ -48,7 +49,7 @@ function [tmgi_null, lacy_null] = lac_system_nullclines(consts, params)
     % active LacI (i.e., r).
     lac_i = subs(exprs.lac_i, ...
         {rT n}, {consts.rT params.n} ...
-    )
+    );
     
     % tmg_i nullcline.
     tmgi_eqn = compose(null_eqn, exprs.tmg_i);
@@ -65,7 +66,39 @@ function [tmgi_null, lacy_null] = lac_system_nullclines(consts, params)
         {params.alph params.beta_t params.beta_g lac_i consts.r0 consts.rT params.n} ...
     );
 	lacy_null = solve(lacy_eqn, lac_y);
+end
 
+
+function [tmgi_eqn, lacy_eqn] = lac_system_nulleqns(consts, params)
+    syms tmg_i lac_y alph beta_t beta_g r r0 rT rate n;
+    
+    % set up helpers.
+	null_eqn = rate == 0;
+	exprs = lac_system_exprs;
+
+    % solve dependent parameters and consts.
+    consts.r0 = consts.rT/(params.rho - 1);
+    params.alph = 84.4/(1 + (consts.glu/8.1)^1.2) + 16.1;
+    params.beta_t = 1.23e-03 * consts.tmg_e^0.6;
+
+    % active LacI (i.e., r).
+    lac_i = subs(exprs.lac_i, ...
+        {rT n}, {consts.rT params.n} ...
+    );
+    
+    % tmg_i nullcline.
+    tmgi_eqn = compose(null_eqn, exprs.tmg_i);
+    tmgi_eqn = subs(tmgi_eqn, ...
+        {alph beta_t beta_g r0 rT params.n}, ...
+        {params.alph params.beta_t params.beta_g consts.r0 consts.rT params.n} ...
+    );
+
+    % % lacy nullcline.
+    lacy_eqn = compose(null_eqn, exprs.lac_y);
+    lacy_eqn = subs(lacy_eqn, ...
+        {alph beta_t beta_g r r0 rT params.n}, ...
+        {params.alph params.beta_t params.beta_g lac_i consts.r0 consts.rT params.n} ...
+    );
 end
 
 
