@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np 
 import os 
 
-IN_FILE = os.path.join("./data/lacy_at_init_36.csv")
-OUT_FILE = os.path.join("./data/lacy_at_init_36_gen.csv")
+IN_FILE = os.path.join("./data/lacy_at_init_6.csv")
+OUT_FILE = os.path.join("./data/lacy_at_init_6_gen.csv")
 
 
 def bin_timepoints(trajectory):
