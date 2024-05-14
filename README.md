@@ -1,12 +1,21 @@
-# Maximum Entropy Inference of Biological Networks
-
-Maximum Entropy (MaxEnt)-based parameter inference applied to cell signaling networks simplified as Markov Birth-Death processes.
+# Maximum Entropy Inference of Heterogeneity in Biological Networks
 
 ## Quick links
 
 - [Project Summary Report [PDF]](./docs/project-report.pdf).
 - [Analysis Code Notebook [Matlab LiveScript PDF]](./docs/code-notebook.pdf).
 - [Synthetic Datasets [CSVs]](./data).
+
+## Overview
+
+- **Broader Goal**: Appoximate biological processes, such as signaling, as Markov birth-death processes and infer their parameters by MaxEnt.
+
+   <img src="./docs/assets/broad-goal.png" width=700 />
+
+
+- Analysis of Bistability in _E.coli Lactose Utilization Network_ as a model network to infer species abundance trajectories by MaxEnt.
+
+  <img src="./docs/assets/ecoli-bistability.png" width=700 />
 
 
 ## Key References
