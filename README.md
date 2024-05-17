@@ -16,7 +16,7 @@
   
   <img src="./docs/assets/ecoli-bistability.png" width=600 />
   
-- Infer molecular abundance time-evolution trajectories using MaxEnt in the lactose utilization network.
+- Infer molecular abundance time-evolution trajectories using MaxEnt in the _E.coli lactose utilization network_.
   
   <img src="./docs/assets/sample-trajectory-inference.png" width=700 />
 
