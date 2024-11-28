@@ -8,7 +8,7 @@
 
 ## Overview
 
-- **Overarching Goal**: Appoximate biological process networks - _such as molecular signaling and protein inetractions_ - as Markov birth-death processes and infer their parameters using MaxEnt to quantitatively characterize and predict cell` population response heterogeneity.
+- **Overarching Goal**: Appoximate biological process networks - _such as molecular signaling and protein inetractions_ - as Markov birth-death processes and infer their parameters using MaxEnt to quantitatively characterize and predict cell population response heterogeneity.
 
    <img src="./docs/assets/broad-goal.png" width=600 />
 
